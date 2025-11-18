@@ -1,8 +1,5 @@
 import { type CommandsRegistry, registerCommand, runCommand } from "./commands/commands";
-import { handlerLogin } from "./users";
-import { handlerRegister } from "./register";
-import { readConfig } from "./config";
-import { conn } from "./lib/db";
+import { handlerLogin, handlerRegister } from "./commands/users";
 
 async function main() {
   const args = process.argv.slice(2);
@@ -20,8 +17,6 @@ async function main() {
 
   try {
     await runCommand(commandsRegistry, cmdName, ...cmdArgs);
-    const cfg = readConfig();
-    console.log(cfg);
   } catch (err) {
     if (err instanceof Error) {
       console.error(`Error running command ${cmdName}: ${err.message}`);
