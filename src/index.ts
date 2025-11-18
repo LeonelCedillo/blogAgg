@@ -1,8 +1,10 @@
 import { type CommandsRegistry, registerCommand, runCommand } from "./commands/commands";
 import { handlerLogin } from "./users";
+import { handlerRegister } from "./register";
 import { readConfig } from "./config";
+import { conn } from "./lib/db";
 
-function main() {
+async function main() {
   const args = process.argv.slice(2);
   if (args.length < 1) {
     console.log("usage: cli <command> [args...]");
@@ -14,9 +16,10 @@ function main() {
   const commandsRegistry: CommandsRegistry = {}
 
   registerCommand(commandsRegistry, "login", handlerLogin);
+  registerCommand(commandsRegistry, "register", handlerRegister);
 
   try {
-    runCommand(commandsRegistry, cmdName, ...cmdArgs);
+    await runCommand(commandsRegistry, cmdName, ...cmdArgs);
     const cfg = readConfig();
     console.log(cfg);
   } catch (err) {
@@ -27,6 +30,7 @@ function main() {
     }
     process.exit(1);
   }
+  process.exit(0);
 }
 
 main();
