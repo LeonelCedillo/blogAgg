@@ -1,7 +1,7 @@
 import { type CommandsRegistry, registerCommand, runCommand } from "./commands/commands";
 import { handlerLogin, handlerRegister, handlerUsers } from "./commands/users";
 import { handlerAgg } from "./commands/aggregate";
-import { handlerAddFeed, handlerListFeeds } from "./commands/feeds";
+import { handlerAddFeed, handlerFeedFollowsForUser, handlerFollow, handlerListFeeds } from "./commands/feeds";
 import { handlerReset } from "./commands/reset";
 
 async function main() {
@@ -22,6 +22,8 @@ async function main() {
   registerCommand(commandsRegistry, "agg", handlerAgg);
   registerCommand(commandsRegistry, "addfeed", handlerAddFeed);
   registerCommand(commandsRegistry, "feeds", handlerListFeeds);
+  registerCommand(commandsRegistry, "follow", handlerFollow);
+  registerCommand(commandsRegistry, "following", handlerFeedFollowsForUser);
 
   try {
     await runCommand(commandsRegistry, cmdName, ...cmdArgs);
