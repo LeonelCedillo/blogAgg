@@ -9,3 +9,9 @@ export async function createFeed(feedName: string, url: string, userId: string) 
         .returning();
     return firstOrUndefined(result);
 }
+
+
+export async function getFeeds() {
+    const result = await db.select().from(feeds);
+    return result
+}
