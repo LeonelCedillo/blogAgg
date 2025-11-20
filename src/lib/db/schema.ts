@@ -10,7 +10,6 @@ export const users = pgTable("users", {
   name: text("name").notNull().unique(),
 });
 
-// feeds table:
 
 export const feeds = pgTable("feeds", {
   id: uuid("id").primaryKey().defaultRandom().notNull(),
@@ -21,8 +20,10 @@ export const feeds = pgTable("feeds", {
     .$onUpdate(() => new Date()),
   name: text("name").notNull(),
   url: text("url").notNull().unique(),
-  userId: uuid("user_id").notNull().references(() =>users.id, {onDelete: "cascade"}),
+  userId: uuid("user_id").notNull()
+    .references(() =>users.id, { onDelete: "cascade" }),
 });
+
 
 export type Feed = typeof feeds.$inferSelect; // feeds is the table object;
 export type User = typeof users.$inferSelect;

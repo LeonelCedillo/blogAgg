@@ -1,8 +1,8 @@
 import { type CommandsRegistry, registerCommand, runCommand } from "./commands/commands";
 import { handlerLogin, handlerRegister, handlerUsers } from "./commands/users";
+import { handlerAgg } from "./commands/aggregate";
 import { handlerAddFeed } from "./commands/feeds";
 import { handlerReset } from "./commands/reset";
-import { handlerAgg } from "./commands/aggregate";
 
 async function main() {
   const args = process.argv.slice(2);

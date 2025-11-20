@@ -1,10 +1,11 @@
 import { db } from "..";
 import { feeds } from "../schema";
+import { firstOrUndefined } from "./utils";
 
-export async function createFeed(name: string, url: string, userId: string) {    
-    const [result] = await db
+export async function createFeed(feedName: string, url: string, userId: string) {    
+    const result = await db
         .insert(feeds)
-        .values({ name: name, url: url, userId: userId})
+        .values({ name: feedName, url, userId})
         .returning();
-    return result;
+    return firstOrUndefined(result);
 }
