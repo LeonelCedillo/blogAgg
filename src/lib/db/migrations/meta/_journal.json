@@ -1,1 +1,11 @@
-{"version":"7","dialect":"postgresql","entries":[]}
+{
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1763610697295,
+      "tag": "0000_thick_clea",
+      "breakpoints": true
+    }
+  ]
+}
