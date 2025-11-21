@@ -1,8 +1,11 @@
+import type { User } from "src/lib/db/schema";
+
 
 export type CommandHandler = (
     cmdName: string, 
     ...args: string[]
 ) => Promise<void>;
+
 
 export type CommandsRegistry = Record<string, CommandHandler>
 
@@ -16,6 +19,7 @@ export function registerCommand(
     registry[cmdName] = handler;
 }
 
+
 // This function runs a given command with the provided state if it exists.
 export async function runCommand(
     registry: CommandsRegistry, 
@@ -28,4 +32,11 @@ export async function runCommand(
     }
     await handler(cmdName, ...args);
 }   
+
+
+export type UserCommandHandler = (
+  cmdName: string,
+  user: User,
+  ...args: string[]
+) => Promise<void>;
 

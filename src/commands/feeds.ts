@@ -1,24 +1,15 @@
-import { readConfig } from "../config";
-import { Feed, User } from "src/lib/db/schema";
-import { getUser, getUserById } from "src/lib/db/queries/users";
+import type { Feed, User } from "src/lib/db/schema";
+import { getUserById } from "src/lib/db/queries/users";
 import { createFeed, getFeeds } from "src/lib/db/queries/feeds";
 import { createFeedFollow } from "src/lib/db/queries/feed_follows";
 
 
-export async function handlerAddFeed(cmdName: string, ...args: string[]) {
+export async function handlerAddFeed(cmdName: string, user: User, ...args: string[]) {
     if (args.length !== 2) {
         throw new Error(`usage: ${cmdName} <feed_name> <feed url>`);
     }
-
-    const config = readConfig();
-    const user = await getUser(config.currentUserName);
-    if (!user) {
-        throw new Error(`User ${config.currentUserName} not found`);
-    }
-
     const feedName = args[0];
     const url = args[1];
-
     const feed = await createFeed(feedName, url, user.id);
     if (!feed) {
         throw new Error("Failed to create feed");
