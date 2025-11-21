@@ -17,25 +17,8 @@ export async function getFeeds() {
 }
 
 
-export async function createFeedFollow(userId:string, feedId: string) {
-    const result = await db.insert(feedFollows)
-        .values({ userId, feedId })
-        .returning();
-    return firstOrUndefined(result);
-}
-
-
 export async function getFeedByURL(url: string) {
     const result = await db.select().from(feeds).where(eq(feeds.url, url));
     return firstOrUndefined(result);
 }
 
-export async function getFeedById(feedId: string) {
-    const result = await db.select().from(feeds).where(eq(feeds.id, feedId));
-    return firstOrUndefined(result);
-}
-
-export async function getFeedFollowsForUser (userId: string) {
-    const result = await db.select().from(feedFollows).where(eq(feedFollows.userId, userId));
-    return result;
-}

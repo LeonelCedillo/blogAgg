@@ -37,6 +37,7 @@ export const feedFollows = pgTable("feed_follows", {
   feedId: uuid("feed_id").notNull().references(() => feeds.id, { onDelete: "cascade" }),
 }, (table) => [
   unique("user_feed_unique").on(table.userId, table.feedId),
+  // (t) => ({ unq: unique().on(t.userId, t.feedId) })
 ]);
 
 export type FeedFollows = typeof feedFollows.$inferSelect;
