@@ -1,10 +1,10 @@
-import { type CommandsRegistry, registerCommand, runCommand } from "./commands/commands";
-import { handlerLogin, handlerRegister, handlerUsers } from "./commands/users";
 import { handlerAgg } from "./commands/aggregate";
-import { handlerAddFeed, handlerListFeeds } from "./commands/feeds";
 import { handlerReset } from "./commands/reset";
-import { handlerFollow, handlerListFeedFollows, handlerUnfollow } from "./commands/feed_follows";
 import { middlewareLoggedIn } from "./middleware";
+import { handlerAddFeed, handlerListFeeds } from "./commands/feeds";
+import { handlerLogin, handlerRegister, handlerUsers } from "./commands/users";
+import { type CommandsRegistry, registerCommand, runCommand } from "./commands/commands";
+import { handlerFollow, handlerListFeedFollows, handlerUnfollow } from "./commands/feed_follows";
 
 async function main() {
   const args = process.argv.slice(2);
