@@ -27,7 +27,7 @@ export async function handlerListFeedFollows(_: string, user: User) {
         console.log("No feed follows found for this user");
         return;
     }
-    console.log(`Feed follows for user ${user.id}:`);
+    console.log(`Feed follows for user ${user.name}:`);
     for (const ff of feedFollows) {
         console.log(`Feed Name: ${ff.feedName}`); 
     }
