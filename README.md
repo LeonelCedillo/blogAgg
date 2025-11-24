@@ -5,23 +5,11 @@
 
 1. Install *NVM* and run:<br>
     `nvm use`<br>
-    The project’s *.nvmrc* specifies Node v22.15.0.
+    > The project’s `.nvmrc` file specifies Node v22.15.0.
 
-3. Install Node dependencies:<br>
+2. Install Node dependencies:<br>
     `npm install`<br>
-    
 
-## Config File (part 1):
-
-1. Create a config file in your home directory, `~/.gatorconfig.json`, with the following content:
-    ```javascript
-    {
-        "db_url": "connection_string_will_go_here",
-        "current_user_name": "username_will_go_here"
-    }
-    ```
-    > This file will store your database connection credentials for the PostgreSQL database and the currently logged-in user.
-    
 
 ## Database Setup (PostgreSQL):
 
@@ -34,43 +22,49 @@
     Confirm installation (version 16+):<br> 
     `psql --version`
 
-2. (Optional, Linux) set the Postgres **system** user password:<br>
-    `sudo passwd postgres`<br>
+    > (Optional, Linux) set the Postgres **system** user password:<br>
+    > `sudo passwd postgres`
 
-4. Start the Postgres server:<br>
+2. Start the Postgres server:<br>
     **Mac:** `brew services start postgresql@16`<br>
     **Linux/WSL:** `sudo service postgresql start`<br>
 
-5. Connect to the server:
+3. Connect to the server:<br>
     **Mac:** `psql postgres`<br>
     **Linux/WSL:** `sudo -u postgres psql`<br>
     > You will enter the *psql* shell (`postgres=#`). *psql* it's the "default" client for Postgres and a great way to interact with the database. Or, use a GUI like [PGAdmin](https://www.pgadmin.org/).
 
-6. Create and connect the database (example: *gator*):<br>
+4. Create and connect the database (example: *gator*):<br>
     `CREATE DATABASE gator;`<br>
     `\c gator`<br>
-    > You should see: `gator=#`
+    > You should see: `gator=#`<br>
+    > (Optional, Linux) set the Postgres **database** user password:<br>
+    > `ALTER USER postgres PASSWORD 'postgres';`<br>
 
-8. (Optional, Linux): set the Postgres **database** user password:
-    `ALTER USER postgres PASSWORD 'postgres';`<br>
 
-
-## Config File (part 2):
+## Config File:
 
 1. Get your connection string:<br>
-`protocol://username:password@host:port/database`<br>
-> The URL with all of the information needed to connect to a database.<br>
-> The default network port that Postgres listens on is: 5432.<br>
-> Examples:<br>
-> **macOS** (no password, your username):<br>
-    > `postgres://myUserName:@localhost:5432/gator`<br>
-> **Linux** (password: postgres , user: postgres):<br>
-    > `postgres://postgres:postgres@localhost:5432/gator`
+    `protocol://username:password@host:port/database`<br>
+    > The URL with all of the information needed to connect to a database.<br>
+    > The default network port that Postgres listens on is: 5432.<br>
+    > Examples:<br>
+    > **macOS** (no password, your username):<br>`postgres://myUserName:@localhost:5432/gator`<br>
+    > **Linux** (password: postgres , user: postgres):<br>`postgres://postgres:postgres@localhost:5432/gator`
 
 2. Test your connection string, for example:<br>
     `psql "postgres://username:@localhost:5432/gator"`
 
-3. Add the connection string to the `.gatorconfig.json` file:<br>
+3. Create a config file in your home directory, `~/.gatorconfig.json`, with the following content:
+    ```javascript
+    {
+        "db_url": "connection_string_will_go_here",
+        "current_user_name": "username_will_go_here"
+    }
+    ```
+    > This file will store your database connection credentials for the PostgreSQL database and the currently logged-in user.
+
+4. Add the connection string to the `.gatorconfig.json` file:<br>
     `protocol://username:password@host:port/database?sslmode=disable`<br>
     > In the config file it needs an additional `sslmode=disable` query string than the psql format.
 
@@ -86,7 +80,7 @@
 
 1. Run the CLI:<br>
     `npm run start`<br>
-    > Usage format: cli `command` `[args...]`<br>
+    > Usage format: cli `command [args...]`<br>
     > Example: `npm run start register alice`
 
 
