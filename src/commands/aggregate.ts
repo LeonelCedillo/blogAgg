@@ -61,7 +61,7 @@ export async function scrapeFeeds(): Promise<void> {
                 publishedAt: new Date(item.pubDate),
             } satisfies NewPost);
         }
-        // console.log(item.title);
+        console.log(item.title);
     }
     console.log();
     console.log();
